@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Message</title>
+    <style>
+        /* Add some basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .warning {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enter Your Information</h1>
+        <form id="userForm">
+            <!-- Text box for first name -->
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName"><br><br>
+            <!-- Text box for last name -->
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName"><br><br>
+            <!-- Text box for zip code -->
+            <label for="zipCode">Zip Code:</label>
+            <input type="text" id="zipCode" name="zipCode"><br><br>
+            <button type="button" onclick="validateForm()">Submit</button>
+        </form>
+        <p id="message" class="warning"></p>
+    </div>
+    <script>
+        // Function to validate the form inputs
+        function validateForm() {
+            // Get the values from the input fields
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const zipCode = document.getElementById('zipCode').value;
+            const fullName = firstName + ' ' + lastName;
+            const message = document.getElementById('message');
+
+            // Check if the full name is more than 20 characters
+            if (fullName.length > 20) {
+                message.textContent = 'Full name must be 20 characters or less.';
+                return;
+            }
+
+            // Check if the zip code is exactly 5 digits
+            const zipCodePattern = /^\d{5}$/;
+            if (!zipCodePattern.test(zipCode)) {
+                message.textContent = 'Zip code must be exactly 5 digits.';
+                return;
+            }
+
+            // If all inputs are valid, show the secret message
+            message.textContent = 'Welcome! Here is your secret message: [Your Secret Message]';
+            message.classList.remove('warning');
+        }
+    </script>
+</body>
+</html>
